@@ -12,33 +12,32 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
-        'name',
+        'firstname',
+        'lastname',
         'email',
+        'phone_number',
         'password',
+        'id_gender', 
+        'birthday',   
+        'newsletter', 
+        'optin',      
+        'active',     
+        'prestashop_customer_id' 
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // Ajout de la méthode pour spécifier l'algorithme de hachage MD5
+    public function getAuthPassword()
+    {
+        return $this->password; // Retourne le mot de passe déjà haché en MD5
+    }
 }
