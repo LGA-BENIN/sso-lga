@@ -26,3 +26,6 @@ Route::get('/home', function () {
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('auth/redirect', [App\Http\Controllers\AuthController::class, 'redirectToGoogle']);
+Route::get('auth/callback/google', [App\Http\Controllers\AuthController::class, 'handleGoogleCallback']);

@@ -91,6 +91,9 @@
             <button type="submit">Se connecter</button>
         </form>
 
+        <!-- Exemple dans login.blade.php et register.blade.php -->
+        <a href="{{ url('auth/redirect') }}">Se connecter avec Google</a>
+
         <div class="link">
             Pas encore inscrit ? <a href="{{ url('/register') }}">Inscrivez-vous ici</a>
         </div>

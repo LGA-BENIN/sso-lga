@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
 {
@@ -30,7 +31,6 @@ class AuthController extends Controller
         ]);
 
         $user = User::where('phone_number', $request->phone_number)->first();
-
 
         // Tentative d'authentification
         if ($user && md5($request->password) === $user->password) {
@@ -85,4 +85,50 @@ class AuthController extends Controller
 
         return redirect('/login');
     }
-}
+
+    // Gérer la connexion avec Google
+    public function redirectToGoogle()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function handleGoogleCallback()
+    {
+        try {
+            $user = Socialite::driver('google')->user();
+    
+            // Récupérer les informations supplémentaires de l'utilisateur
+            $additionalUserInfo = $user->user;
+            $birthdate = $additionalUserInfo['birthdays'][0]['date'] ?? null;
+            $phone = $additionalUserInfo['phoneNumbers'][0]['value'] ?? null;
+    
+            // Trouver ou créer un utilisateur avec les informations obtenues de Google
+            $authUser = User::where('google_id', $user->getId())->first();
+    
+            if (!$authUser) {
+                $authUser = User::create([
+                    'firstname' => $user->getName(),
+                    'email' => $user->getEmail(),
+                    'google_id' => $user->getId(),
+                    'password' => bcrypt(\Illuminate\Support\Str::random(16)), // Mot de passe aléatoire pour les utilisateurs créés
+                    'birthday' => $birthdate,
+                    'phone_number' => $phone,
+                ]);
+            } else {
+                // Mettre à jour les informations supplémentaires
+                $authUser->update([
+                    'birthday' => $birthdate,
+                    'phone_number' => $phone,
+                ]);
+            }
+    
+            Auth::login($authUser, true);
+    
+            // Rediriger vers la page d'accueil ou autre
+            return redirect('/home');
+    
+        } catch (\Exception $e) {
+            return redirect('/login')->withErrors('Unable to login using Google. Please try again.');
+        }
+    }
+     }
