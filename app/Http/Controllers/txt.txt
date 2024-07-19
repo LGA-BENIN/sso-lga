@@ -6,22 +6,13 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Passport\Client; // Ajout pour 
+
 
 class AuthController extends Controller
 {
-    // Affiche le formulaire de connexion
-    public function showLoginForm()
-    {
-        return view('login'); // Afficher la vue login.blade.php
-    }
+    // ... (showLoginForm et showRegistrationForm inchangés)
 
-    // Affiche le formulaire d'inscription
-    public function showRegistrationForm()
-    {
-        return view('register'); // Afficher la vue register.blade.php
-    }
-
-    // Gère la connexion des utilisateurs
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -29,14 +20,13 @@ class AuthController extends Controller
             'password' => ['required'],
         ]);
 
-        $user = User::where('phone_number', $request->phone_number)->first();
+        // Utilisation de 'phone_number' dans la tentative d'authentification
+        if (Auth::attempt(['phone_number' => $request->phone_number, 'password' => md5($request->password)])) {
+            $user = $request->user(); // Récupération de l'utilisateur authentifié depuis la requête
+            $token = $user->createToken('PrestaShop')->accessToken; // Création du token
 
-
-        // Tentative d'authentification
-        if ($user && md5($request->password) === $user->password) {
-            Auth::login($user); // Connecter l'utilisateur
-            // Redirection vers la page d'accueil après connexion réussie
-            return redirect('/home')->with('status', 'Vous êtes connecté');
+            $prestaShopUrl = config('app.prestashop_url') . '/module/ssologin/login?token=' . $token;
+            return redirect($prestaShopUrl);
         }
 
         return back()->withErrors([
@@ -44,14 +34,13 @@ class AuthController extends Controller
         ]);
     }
 
-    // Gère l'inscription des utilisateurs
     public function register(Request $request)
     {
         $request->validate([
             'firstname' => ['required', 'string', 'max:255'],
             'lastname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'phone_number' => ['required', 'string', 'max:255'],
+            'phone_number' => ['required', 'string', 'max:255'], // Ajout du numéro de téléphone
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'id_gender' => ['nullable', 'integer'],
             'birthday' => ['nullable', 'date'],
@@ -63,19 +52,31 @@ class AuthController extends Controller
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
             'email' => $request->email,
-            'phone_number' => $request->phone_number,
-            'password' => md5($request->password),
+            'phone_number' => $request->phone_number, // Enregistrement du numéro de téléphone
+            'password' => md5($request->password), // Hachage MD5
             'id_gender' => $request->id_gender,
             'birthday' => $request->birthday,
             'newsletter' => $request->newsletter,
             'optin' => $request->optin,
         ]);
 
-        // Redirection vers la page d'accueil après inscription réussie
-        return redirect('/home')->with('status', 'Vous êtes inscrit et connecté');
+        // Génération du token
+        $token = $user->createToken('Prestashop')->accessToken;
+
+        // Rediriger vers PrestaShop avec le token
+        $prestaShopUrl = config('app.prestashop_url') . '/module/ssologin/login?token=' . $token;
+        return redirect($prestaShopUrl);
     }
 
-    // Gère la déconnexion des utilisateurs
+    public function showLoginForm()
+    {
+        return view('login'); // Afficher la vue login.blade.php
+    }
+
+    public function showRegistrationForm()
+    {
+        return view('register'); // Afficher la vue register.blade.php
+    }
     public function logout(Request $request)
     {
         Auth::logout();
@@ -83,6 +84,7 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
+        // Rediriger vers la page de connexion (à implémenter plus tard)
         return redirect('/login');
     }
 }
