@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
+use Exception;
+use Carbon\Carbon;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail; // Add this line
 
 class AuthController extends Controller
 {
@@ -103,17 +108,18 @@ class AuthController extends Controller
             $phone = $additionalUserInfo['phoneNumbers'][0]['value'] ?? null;
     
             // Trouver ou créer un utilisateur avec les informations obtenues de Google
-            $authUser = User::where('google_id', $user->getId())->first();
+            $authUser = User::where('google_id', $user->id)->first();
     
             if (!$authUser) {
                 $authUser = User::create([
                     'firstname' => $user->getName(),
                     'email' => $user->getEmail(),
                     'google_id' => $user->getId(),
-                    'password' => bcrypt(\Illuminate\Support\Str::random(16)), // Mot de passe aléatoire pour les utilisateurs créés
+                    'password' => bcrypt(Str::random(16)), // Mot de passe aléatoire pour les utilisateurs créés
                     'birthday' => $birthdate,
                     'phone_number' => $phone,
                 ]);
+                
             } else {
                 // Mettre à jour les informations supplémentaires
                 $authUser->update([
@@ -127,8 +133,75 @@ class AuthController extends Controller
             // Rediriger vers la page d'accueil ou autre
             return redirect('/home');
     
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return redirect('/login')->withErrors('Unable to login using Google. Please try again.');
         }
     }
-     }
+
+    public function showForgotForm() {
+        return view('forgot');
+    }
+
+    public function sendResetLink(Request $request) {
+
+        $request->validate([
+            'email' => 'required|email|exists:users,email'
+        ]);
+
+        $token = Str::random(64);
+        DB::table('password_resets')->insert([
+            'email' => $request->email,
+            'token' => $token,
+            'created_at' => Carbon::now(),
+        ]);
+       
+            $action_link = route('reset.password.from', ['token' => $token, 'email' => $request->email]);
+
+            $body = "Hello, <br /><br />Please click the link below to reset your password:<br><a href='".$action_link."'>Reset Password</a><br><br>Thank you!";           
+            Mail::send('email-forgot',['action_link' => $action_link, 'body'=>$body], function ($message) use ($request) {
+                $message->from('noreply@example.com', 'Laravel');
+                $message->to($request->email,"laravel")
+                ->subject('Reset Password');
+            });
+
+        return back()->with('success', 'Email envoyé');
+    }
+
+    public function showResetForm(Request $request, $token = null) {
+        return view('reset')->with(['token' => $token, 'email' => $request->email]);
+    }
+
+    public function resetPassword(Request $request) {
+        $request->validate([
+            'email' => 'required|email|exists:users,email',
+            'password' => 'required|string|min:6|confirmed',
+            'password_confirmation' => 'required',
+        ]);
+
+        $check_token = DB::table('password_resets')->where([
+            'email' => $request->email,
+            'token' => $request->token
+        ])->first();
+
+        if(!$check_token) {
+            return back()->withInput()->with('error', 'Invalid token!');
+        } else {
+            User::where('email', $request->email)->update([
+                'password' => md5($request->password),
+            ]);
+
+            DB::table('password_resets')->where([
+                'email' => $request->email
+            ])->delete();
+
+            return redirect('/login')->with('success', 'Password reset successfully')
+            ->with('email', $request->email);
+
+        }
+
+
+    }
+
+
+} 
+

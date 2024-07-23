@@ -1,0 +1,282 @@
+
+body {
+  font-family: 'Poppins', Arial, sans-serif; /* Utilisation de la police Poppins */
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-height: 100vh;
+  margin: 0;
+  font-size: 12px; /* Ajustez cette valeur selon vos besoins */
+}
+.password-container {
+  margin-bottom: 20px;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding-right: 30px; /* Adjust this value to make room for the icon */
+}
+
+.input-wrapper .toggle-password {
+  position: absolute;
+  top: 37%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.condition {
+  color: red;
+}
+
+.condition.met {
+  color: green;
+}
+
+.condition-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.condition-row p {
+  flex: 1;
+  margin: 0 10px;
+}
+
+/* Application de la taille de police à divers éléments */
+h1, h2, h3, h4, h5, h6 {
+  font-size: 12px; /* Ajustez cette valeur pour les titres */
+}
+
+p, li, ul, pre, div, figure, blockquote, figcaption, label {
+  font-size: 12px; /* Ajustez cette valeur pour les paragraphes et autres éléments */
+}
+
+button, input, select, textarea {
+  font-size: 12px; /* Ajustez cette valeur pour les formulaires */
+}
+
+thq-heading-2 {
+  font-size: 12px; /* Ajustez cette valeur pour la classe thq-heading-2 */
+}
+
+thq-body-large {
+  font-size: 12px; /* Ajustez cette valeur pour la classe thq-body-large */
+}
+
+thq-body-small {
+  font-size: 12px; /* Ajustez cette valeur pour la classe thq-body-small */
+}
+
+.logo {
+  transform: scale(0.5); /* Réduit l'image à 50% de sa taille originale */
+}
+
+.container {
+  background: #ffffff; /* Arrière-plan translucide */
+  
+  border: #083263 1px solid;
+  border-radius: 20px;
+  padding: 60px;
+  max-height: 79vh;   /*80% de la hauteur de la fenêtre */
+  transition: height 0.3s ease;
+  width: 400px;
+}
+
+
+h1 {
+  text-align: center;
+  color: #0C203E;
+}
+
+.progress-bar {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0px;
+  width: 100%;
+}
+
+.progress-bar::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: #ddd;
+  z-index: 0;
+  transform: translateY(-50%);
+}
+
+.progress {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 0;
+  height: 5px;
+  background: #d6263d;
+  z-index: 1;
+  transform: translateY(-50%);
+  transition: width 0.4s ease;
+}
+
+.step {
+  position: relative;
+  z-index: 2;
+  width: 32%;
+  text-align: center;
+  padding: 5px;
+}
+
+.step.active .step-circle {
+  background: #d6263d;
+  color: #fff;
+  padding: 15px;
+  margin-top: 20px;
+}
+
+.step .step-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5px;
+  transition: background 0.4s ease;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  /*font-weight: bold;*/
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+select {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  width: calc(100% - 0px);
+}
+
+.buttton {
+  padding: 10px;
+  background-color: #0C203E;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+button:hover {
+  background-color: #083263;
+}
+
+.form-step {
+  display: none;
+  transition: opacity 0.3s ease-in-out; /* Transition en douceur de l'opacité */
+}
+
+.form-step.active {
+  display: block;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.checkbox-group {
+  /*display: flex;
+  flex-direction: column;
+  gap: 10px;*/
+}
+
+.checkbox-group div {
+  /*display: flex;*/
+  align-items: center;
+}
+
+.checkbox-group input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.phone-container {
+  display: flex;
+  align-items: center;
+}
+
+.phone-container img {
+  width: 30px; /* Ajustez la taille du drapeau selon vos besoins */
+  margin-right: 10px; /* Ajustez l'espace entre l'image du drapeau et le champ texte */
+}
+
+.phone-container input[type="tel"] {
+  padding: 10px; /* Ajustez le padding du champ texte selon vos besoins */
+}
+
+/* Styles pour les boutons uniquement */
+.form-step button {
+  width: 120px; /* Largeur des boutons */
+  height: auto; /* Hauteur automatique */
+  border-radius: 30px; /* Rend les boutons circulaires par leur forme */
+  font-size: 16px; /* Ajustez la taille de la police */
+  padding: 15px; /* Ajustez le padding pour centrer le texte */
+  margin: 10px; /* Espacement entre les boutons */
+  display: inline-block; /* Assure que les boutons sont sur une seule ligne */
+  text-align: center; /* Centre le texte à l'intérieur du bouton */
+}
+
+/* Centrage et espacement des boutons */
+.form-step .button-container {
+  text-align: center; /* Centre les boutons horizontalement */
+  margin-top: 20px; /* Espacement depuis le haut */
+}
+
+.form-step .button-container button {
+  margin: 0 10px; /* Espacement entre les boutons */
+}
+.form{
+  position: relative;
+}
+
+
+.inscription-container {
+  width: 100%;
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.inscription-container1 {
+  display: flex;
+  position: relative;
+}
+.inscription-container2 {
+  width: 410px;
+  height: 658px;
+}
+.inscription-container3 {
+  display: contents;
+}

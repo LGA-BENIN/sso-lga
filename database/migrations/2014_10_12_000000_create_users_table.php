@@ -10,7 +10,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('google_id')->nullable()->unique();
+           // $table->string('google_id')->nullable()->unique();
             $table->string('firstname'); 
             $table->string('lastname');  
             $table->string('email', 191)->unique();
@@ -33,9 +33,9 @@ class CreateUsersTable extends Migration
         Schema::dropIfExists('users');
 
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('google_id');
-            $table->dropColumn('birthday');
-            $table->dropColumn('phone_number');
-        });
-    }
+            // $table->dropColumn('google_id');
+           // $table->dropColumn('birthday');
+           // $table->dropColumn('phone_number');
+         });
+     }
 }

@@ -29,3 +29,9 @@ Route::get('/', function () {
 
 Route::get('auth/redirect', [App\Http\Controllers\AuthController::class, 'redirectToGoogle']);
 Route::get('auth/callback/google', [App\Http\Controllers\AuthController::class, 'handleGoogleCallback']);
+
+// Routes de réinitialisation de mot de passe...
+Route::get('/password/forgot', [AuthController::class, 'showForgotForm'])->name('forgot.password.from');
+Route::post('/password/forgot', [AuthController::class, 'sendResetLink'])->name('forgot.password.link');
+Route::get('/password/reset/{token}', [AuthController::class, 'showResetForm'])->name('reset.password.from');
+Route::post('/password/reset', [AuthController::class, 'resetPassword'])->name('reset.password');

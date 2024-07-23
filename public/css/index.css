@@ -1,0 +1,420 @@
+/* Add this style for the icons */
+#phoneIccon {
+  margin-left: 10px; /* Adjust as needed for spacing */
+}
+.error {
+  color: red;
+  font-size: 10px;
+}
+
+/* Style the icons */
+#phoneIccon.material-icons {
+  font-size: 19px; /* Adjust the size as needed */
+}
+
+#phoneIccon.check_circle {
+  color: green;
+}
+
+#phoneIccon.cancel {
+  color: red;
+}
+
+/* Style de base du champ de mot de passe */
+.sign-in8-password .sign-in8-textfield {
+  position: relative; /* Pour positionner le label */
+}
+
+.sign-in8-password label {
+  position: absolute;
+  left: 10px; /* Ajustez la position horizontale */
+  top: 1px;   /* Ajustez la position verticale */
+  transition: 0.3s; /* Transition pour l'animation */
+  pointer-events: none; /* Pour que le label ne gêne pas le clic */
+}
+
+.sign-in8-password input:focus ~ label, 
+.sign-in8-password input:not(:placeholder-shown) ~ label {
+  top: -10px; /* Déplacement vers le haut sur le focus */
+  font-size: 12px; /* Réduction de la taille de la police */
+  color: gray;   /* Changement de couleur (facultatif) */
+}
+.sign-in8-form h1 {
+  font-size: x-large;
+}
+
+/* Animation supplémentaire (facultatif) */
+.sign-in8-password input:focus ~ label {
+  animation: moveUp 0.3s ease;
+}
+
+@keyframes moveUp {
+  0% { top: 10px; }
+  100% { top: -10px; }
+}
+
+.sign-in8-container {
+  width: 100%;
+  height: 613px;
+  display: flex;
+  overflow: hidden;
+  position: fixed;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+}
+.sign-in8-max-width {
+  height: 611px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+}
+.sign-in8-container1 {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  align-self: center;
+  align-items: flex-start;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.sign-in8-sign-up-image {
+  width: 100%;
+  height: 100%;
+  object-position: left;
+}
+.sign-in8-container2 {
+  top: 0px;
+  flex: 0 0 auto;
+  left: 0px;
+  right: 0px;
+  width: 100%;
+  bottom: 0px;
+  height: 100%;
+  display: flex;
+  position: absolute;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  background-color: rgba(0,0,0,0.6);
+}
+.sign-in8-container3 {
+  gap: var(--dl-space-space-halfunit);
+  flex: 0 0 auto;
+  display: flex;
+  z-index: 100;
+  align-self: center;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.sign-in8-image {
+  width: 96px;
+  height: 50px;
+  object-fit: cover;
+}
+.sign-in8-text {
+  color: var(--dl-color-theme-neutral-light);
+}
+.sign-in8-text01 {
+  color: var(--dl-color-theme-neutral-light);
+}
+.sign-in8-form-root {
+  gap: var(--dl-space-space-unit);
+  width: 50%;
+  /*height: 100%;*/
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  flex-shrink: 0;
+  flex-direction: column;
+  padding-bottom: var(--dl-space-space-twounits);
+  justify-content: center;
+  position: relative;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+.sign-in8-image1 {
+  width: 200px;
+  display: none;
+  object-fit: cover;
+}
+.sign-in8-form {
+  gap: var(--dl-space-space-twounits);
+  width: 100%;
+  display: flex;
+  max-width: 500px;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.sign-in8-text02 {
+  color: #0c203e;
+  font-family: "Poppins";
+}
+.sign-in8-form1 {
+  gap: var(--dl-space-space-unit);
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+.sign-in8-email {
+  gap: var(--dl-space-space-halfunit);
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-shrink: 0;
+  flex-direction: column;
+}
+.sign-in8-container4 {
+  flex: 0 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-right: 0px;
+  justify-content: center;
+}
+.sign-in8-image2 {
+  width: 45px;
+  object-fit: cover;
+}
+.sign-in8-text03 {
+  font-size: 20px;
+  font-style: normal;
+  font-family: "Poppins";
+  font-weight: 400;
+  margin-left: 10px;
+}
+.sign-in8-textinput {
+  width: 100%;
+  font-size: 12px;
+  border-color: #d6263d;
+  border-style: solid;
+  border-width: 0px;
+  border-radius: 0px;
+  background-color: transparent;
+  border-bottom-width: 1px;
+}
+.sign-in8-password {
+  gap: var(--dl-space-space-halfunit);
+  width: 100%;
+  display: flex;
+  margin-top: var(--dl-space-space-oneandhalfunits);
+  align-items: flex-start;
+  margin-bottom: 0px;
+  flex-direction: column;
+}
+.sign-in8-textfield {
+  gap: var(--dl-space-space-halfunit);
+  width: 100%;
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  flex-shrink: 0;
+  flex-direction: column;
+}
+.sign-in8-text06 {
+  font-size: 16px;
+  font-family: "Poppins";
+}
+.sign-in8-textinput1 {
+  width: 100%;
+  font-size: 12px;
+  border-color: #d6263d;
+  border-width: 0px;
+  border-radius: 0px;
+  background-color: transparent;
+  border-bottom-width: 1px;
+}
+.sign-in8-text07 {
+  font-size: 12px;
+  align-self: flex-end;
+  font-family: Poppins;
+  font-weight: 400;
+  line-height: 1.15;
+  text-transform: none;
+  text-decoration: none;
+  top: 0px;
+}
+.sign-in8-button {
+  width: 100%;
+  border-color: #d6263d;
+  background-color: #D6263D;
+}
+.sign-in8-text08 {
+  text-align: center;
+  font-family: "Poppins";
+}
+.sign-in8-divider {
+  gap: var(--dl-space-space-oneandhalfunits);
+  width: var(--dl-size-size-xxlarge);
+  height: auto;
+  display: flex;
+  z-index: 100;
+  align-self: center;
+  margin-top: -30px;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: var(--dl-radius-radius-radius4);
+  margin-bottom: -30px;
+  justify-content: center;
+}
+.sign-in8-divider1 {
+  flex: 1;
+  width: var(--dl-size-size-medium);
+  height: 1px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  background-color: #c2c0c0;
+}
+.sign-in8-text09 {
+  color: #c2c0c0;
+}
+.sign-in8-divider2 {
+  flex: 1;
+  width: auto;
+  height: 1px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  background-color: #c2c0c0;
+}
+.sign-in8-button1 {
+  gap: var(--dl-space-space-halfunit);
+  color: #0c203e;
+  display: flex;
+  align-self: center;
+  box-shadow: inherit;
+  box-sizing: border-box;
+  border-color: #0c203e;
+}
+.sign-in8-icon {
+  width: 24px;
+  height: 24px;
+}
+.sign-in8-text10 {
+  font-family: "Poppins";
+}
+.sign-in8-link {
+  display: contents;
+}
+.sign-in8-text11 {
+  font-size: 16px;
+  align-self: flex-start;
+  font-family: "Poppins";
+  margin-bottom: -17px;
+  text-decoration: none;
+}
+.sign-in8-button2 {
+  width: 100%;
+  padding-top: var(--dl-space-space-unit);
+  border-color: #d6263d;
+  border-width: 0px;
+  padding-bottom: var(--dl-space-space-unit);
+  background-color: #0c203e;
+  margin-top: 12px;
+}
+.sign-in8-text12 {
+  color: white;
+  font-style: normal;
+  text-align: center;
+  font-family: "Poppins";
+  font-weight: 400;
+}
+@media(max-width: 991px) {
+  .sign-in8-container {
+    gap: var(--dl-space-space-twounits);
+    height: auto;
+    position: relative;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .sign-in8-max-width {
+    height: auto;
+    flex-direction: column;
+  }
+  .sign-in8-container1 {
+    width: 100%;
+    height: auto;
+  }
+  .sign-in8-sign-up-image {
+    display: none;
+  }
+  .sign-in8-container2 {
+    height: auto;
+  }
+  .sign-in8-container3 {
+    width: auto;
+    height: auto;
+    display: none;
+    box-shadow: 0px 0px 0px 0px #d4d4d4;
+    border-color: rgba(25, 24, 24, 0);
+  }
+  .sign-in8-form-root {
+    width: 100%;
+    padding-right: var(--dl-space-space-oneandhalfunits);
+  }
+  .sign-in8-image1 {
+    width: var(--dl-size-size-large);
+    display: block;
+  }
+  .sign-in8-text02 {
+    font-size: 25px;
+    align-self: center;
+  }
+  .sign-in8-textinput {
+    font-size: 18px;
+  }
+  .sign-in8-button1 {
+    color: #d6263d;
+    border-color: #d6263d;
+  }
+}
+@media(max-width: 767px) {
+  .sign-in8-container {
+    position: relative;
+  }
+}
+@media(max-width: 479px) {
+  .sign-in8-container {
+    position: relative;
+  }
+  .sign-in8-container1 {
+    display: none;
+  }
+  .sign-in8-container2 {
+    background-color: rgba(0,0,0,0.7);
+  }
+  .sign-in8-container3 {
+    padding: var(--dl-space-space-oneandhalfunits);
+  }
+  .sign-in8-text02 {
+    text-align: center;
+  }
+  .sign-in8-button {
+    width: 100%;
+  }
+  .sign-in8-button1 {
+    width: 100%;
+  }
+  .sign-in8-text11 {
+    align-self: flex-start;
+    text-align: center;
+  }
+  .sign-in8-button2 {
+    width: 100%;
+  }
+}
+
+.connexion-container {
+  width: 100%;
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  flex-direction: column;
+}
